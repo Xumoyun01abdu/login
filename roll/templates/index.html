@@ -11,7 +11,7 @@
     <div class="username">
       Welcome, <span id="user"></span>
     </div>
-    <a href="{% url 'index' %}" style="text-decoration:none;">Logout</a>
+    <a href="{% url 'logout' %}" style="text-decoration:none;">Logout</a>
   </div>
 
   <div class="table-container">
@@ -29,7 +29,7 @@
 			{% for product in products %}
 	        <tr>
 	          <td>{{product.name}}</td>
-	          <td>{{product.price}}</td>
+	          <td>{{product.price}}$</td>
 	          <td><img width="50px" src="{{ product.image.url}}" alt="{{image.name}}"></td>
 	          <td>{{product.description}}</td>
 	        </tr>

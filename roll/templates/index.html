@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+  <div class="navbar">
+    <div class="username">
+      Welcome, <span id="user"></span>
+    </div>
+    <a href="{% url 'index' %}" style="text-decoration:none;">Logout</a>
+  </div>
+
+  <div class="table-container">
+	  {% if request.user.is_authenticated %}
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Image</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+			{% for product in products %}
+	        <tr>
+	          <td>{{product.name}}</td>
+	          <td>{{product.price}}</td>
+	          <td><img width="50px" src="{{ product.image.url}}" alt="{{image.name}}"></td>
+	          <td>{{product.description}}</td>
+	        </tr>
+	        {% endfor %}
+      {% else %}
+        <h1>Login qiling</h1>
+      <a href="{% url 'login' %}">Login</a>
+      {% endif %}
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    // URL dagi username ni chiqarish
+    const params = new URLSearchParams(window.location.search);
+    document.getElementById("user").textContent = params.get("username") || "User";
+  </script>
+</body>
+</html>
